@@ -1,0 +1,118 @@
+{% extends 'baseFront.html.twig' %}
+{% block body %}
+
+
+
+    <body>
+    <!-- Start Banner -->
+    <div class="banner-outer inner-banner classes-banner">
+        <span class="banner-shadow"></span>
+        <div class="container">
+            <div class="content" data-aos="fade-down">
+                <h1>CLASSES</h1>
+                <div class="breadcrumbs_outer">
+                    <div class="container">
+                        <ul class="breadcrumbs">
+                            <li><a href="index-2.html">Home</a></li>
+                            <li>Classes</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- End Banner -->
+
+    <!-- Start Feature Classes -->
+    <div class="feature-outer classes-page">
+        <div class="container">
+            <div class="feature-list">
+                <div class="row">
+
+                    {% for a in activities %}
+                    {% if app.request.query.get('id')== a.category.id %}
+                    <div class="col-sm-4 col-xs-12">
+                        <div class="feature-box">
+                            <figure>
+                                <img src="images/feature-thumb1.png" alt="">
+                                <div class="time-box">
+                                    <span class="date"><span>16 DEC</span></span>
+                                    <span class="time"><span>6:30 AM</span></span>
+                                </div>
+                            </figure>
+                            <h4>{{ a.nom }}</h4>
+                            <p>   {{ a.description }}  <a href="">Read More...</a></p>
+                        </div>
+                    </div>
+                    {% elseif app.request.query.get('id')== null %}
+                        <div class="col-sm-4 col-xs-12">
+                            <div class="feature-box">
+                                <figure>
+                                    <img src="images/feature-thumb1.png" alt="">
+                                    <div class="time-box">
+                                        <span class="date"><span>16 DEC</span></span>
+                                        <span class="time"><span>6:30 AM</span></span>
+                                    </div>
+                                </figure>
+                                <h4>{{ a.nom }}</h4>
+                                <p>   {{ a.description }}  <a href="">Read More...</a></p>
+                            </div>
+                        </div>
+                    {% endif %}
+                    {% endfor %}
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- End Feature sec -->
+
+    <!-- Start Finess Sec -->
+    <div class="finess-outer">
+        <div class="container">
+            <h3>Fitness Classes This Summer. <br/>Pay Now and<br/> Get <span>25%</span> Discount</h3>
+            <a href="contact-us.html" class="btn">JOIN WITH US</a>
+        </div>
+    </div>
+    <!-- End Finess sec -->
+    <!-- Start CLASS SCHEDULE sec -->
+    <div class="classSch-outer pagepd">
+        <div class="container">
+            <div class="head">
+                <h3>CLASS SCHEDULE</h3>
+            </div>
+            <ul class="tabs">
+                <li class="active"><a href="#mon">Monday</a></li>
+                <li><a href="#tus">Tuesday</a></li>
+                <li><a href="#wed">Wednesday</a></li>
+                <li><a href="#thrus">Thursday</a></li>
+                <li><a href="#friday">Friday</a></li>
+                <li><a href="#sat">Saturday</a></li>
+                <li><a href="#sun">Sunday</a></li>
+            </ul>
+            <div class="table-outer">
+                <table class="table tab_container" id="mon">
+                    <tr>
+                        <td>Yoga</td>
+                        <td>10.00 am - 12.00 pm</td>
+                        <td>Robert Smith</td>
+                        <td><a href="contact-us.html" class="btn">Join Now</a></td>
+                    </tr>
+
+                </table>
+
+            </div>
+        </div>
+    </div>
+    <!-- End CLASS SCHEDULE sec -->
+    <!-- Start Footer -->
+
+    <!-- End Footer -->
+
+    <!-- Scroll to top -->
+    <a href="#" class="scroll-top"><i class="fa fa-chevron-up" aria-hidden="true"></i></a>
+
+
+    </body>
+
+{% endblock  %}

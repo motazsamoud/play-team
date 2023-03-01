@@ -1,0 +1,126 @@
+{% extends 'baseFront.html.twig' %}
+{% block body %}
+
+
+
+    <body>
+
+
+    <!-- Start Banner -->
+    <div class="banner-outer inner-banner trainers-banner">
+        <span class="banner-shadow"></span>
+        <div class="container">
+            <div class="content">
+                <h1>TRAINERS</h1>
+                <div class="breadcrumbs_outer">
+                    <div class="container">
+                        <ul class="breadcrumbs">
+                            <li><a href="index-2.html">Home</a></li>
+                            <li>Trainers</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- End Banner -->
+
+    {% for c in categories %}
+        <!-- Start Trainers sec -->
+    <div class="trainers-outer bgNone trainers-page">
+        <div class="container">
+            <div class="trainers-list">
+
+
+                <div class="row">
+
+
+                       <div class="col-sm-3 col-lg-12">
+                           <div style="margin-left: 300px" class="trainers-box">
+                               <figure href="{{ path('activityFront', {'id': c.id}) }}">
+                                   <img src="{{ asset('/uploads/'~c.image) }} ">
+
+                               </figure>
+                               <span  style="width: 200px;align-content: center">
+                                   <a href="{{ path('activityFront', {'id': c.id}) }}">{{ c.nom }}</a>
+                               </span>
+                           </div>
+                       </div>
+
+
+
+                </div>
+
+
+            </div>
+        </div>
+    </div>
+    {% endfor %}  <!-- End Trainers sec -->
+    <!-- Start Finess Sec -->
+    <div class="finess-outer">
+        <div class="container">
+            <h3>Fitness Classes This Summer. <br/>Pay Now and<br/> Get <span>25%</span> Discount</h3>
+            <a href="contact-us.html" class="btn">JOIN WITH US</a>
+        </div>
+    </div>
+    <!-- End Finess sec -->
+
+    <!-- Start News sec -->
+    <div class="news-outer">
+        <div class="container">
+            <div class="head">
+                <h3>LATEST NEWS</h3>
+            </div>
+            <div class="news-list">
+                <div class="row">
+                    <div class="col-sm-4 col-xs-12">
+                        <div class="news-box">
+                            <figure><img src="images/news-img1.png" alt="">
+                                <div class="date-box">
+                                    <span>JAN</span>
+                                    <strong>20</strong>
+                                </div>
+                            </figure>
+                            <h4>Lorem ipsum dolor sit amet</h4>
+                            <p>Aliquam eu malesuada risus. Vivamus sagittis enim tempor eros consectetur, at ullamcorper neque maximus. <a href="news-detail.html">Read More...</a></p>
+                        </div>
+                    </div>
+                    <div class="col-sm-4 col-xs-12">
+                        <div class="news-box">
+                            <figure>
+                                <img src="images/news-img2.png" alt="">
+                                <div class="date-box">
+                                    <span>JAN</span>
+                                    <strong>20</strong>
+                                </div>
+                            </figure>
+                            <h4>Pellentesque pellentesque</h4>
+                            <p>Aliquam eu malesuada risus. Vivamus sagittis enim tempor eros consectetur, at ullamcorper neque maximus. <a href="news-detail.html">Read More...</a></p>
+                        </div>
+                    </div>
+                    <div class="col-sm-4 col-xs-12">
+                        <div class="news-box">
+                            <figure>
+                                <img src="images/news-img3.png" alt="">
+                                <div class="date-box">
+                                    <span>JAN</span>
+                                    <strong>20</strong>
+                                </div>
+                            </figure>
+                            <h4>Curabitur et scelerisque dui</h4>
+                            <p>Aliquam eu malesuada risus. Vivamus sagittis enim tempor eros consectetur, at ullamcorper neque maximus. <a href="news-detail.html">Read More...</a></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- End News sec -->
+
+    <!-- Scroll to top -->
+    <a href="#" class="scroll-top"><i class="fa fa-chevron-up" aria-hidden="true"></i></a>
+
+
+    </body>
+
+{% endblock  %}
