@@ -1,0 +1,32 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Article{% endblock %}
+
+{% block body %}
+
+    <h1>Article</h1>                
+                <h3>{{ article.title }} :</h3>
+                <p style="color:#fff;" size="5">{{ article.content }}</p>
+          <a href="/likes/{{article.id}}" class="text-denger">&#10084;</a>  
+          {% if article.Likes is not empty %}
+          {{ article.Likes }} Likes 
+          {% else %}
+          0 Like
+          {% endif %}
+          <br>
+<a class="btn" href="{{ path('app_comment_new', {'id': article.id})}}">add comment</a>
+
+
+
+
+{% for comment in comments %}
+<br>
+<div style="color:#fff;" size="5" >{{ comment.user.email}} a dit :</div>
+<div style="background-color:white;">{{ comment.content }}</div>
+
+{% endfor %}
+
+   
+
+
+{% endblock %}

@@ -1,0 +1,17 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello HomeController!{% endblock %}
+
+{% block body %}
+<h1>BUILD YOUR BODY</h1>
+                        <h2>SPORTIFY</h2>
+                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. In quam libero, molestie in sapien sit amet, vestibulum ultricies est. Vestibulum ac odio a magna aliquet iaculis. Ut vehicula mauris a magna </p>
+                       {% if app.user %}
+          
+          
+            <p> Hello {{ app.user.email }} </p>
+        {% else %}
+                        <a href="{{ path('app_login')}}" class="btn">JOIN WITH US</a>
+                        <a href="{{ path('app_admin_user_index')}}" class="btn">Admin space</a>
+                      {% endif %}  
+{% endblock %}
