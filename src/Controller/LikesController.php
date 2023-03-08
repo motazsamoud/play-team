@@ -29,8 +29,22 @@ class LikesController extends AbstractController
        
         $likes = $article->getLikes();
 
-        $plusDeLikes = $likes +1;
-        $article->setLikes($plusDeLikes);
+        if($article->getLikes() === '0 like') 
+        {
+            $article->setLikes('like');
+        }
+        elseif ($article->getLikes() === 'like') 
+        {
+            $article->setLikes('dislike');
+        } 
+        elseif ($article->getLikes() === 'dislike') 
+        {
+            $article->setLikes('0 like');
+        }
+
+        
+        // $plusDeLikes = $likes +1;
+        // $article->setLikes($plusDeLikes);
         $entityManager->flush();
         $comments = $article->getComments();
         return $this->render('article/show.html.twig', [

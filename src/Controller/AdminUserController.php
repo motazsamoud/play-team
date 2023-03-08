@@ -10,17 +10,30 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 use Symfony\Component\Routing\Annotation\Route;
+use Doctrine\Persistence\ManagerRegistry;
+use Knp\Component\Pager\PaginatorInterface;
+
 
 #[Route('/admin/user')]
 class AdminUserController extends AbstractController
+
 {
+
+    
     #[Route('/', name: 'app_admin_user_index', methods: ['GET'])]
-    public function index(UserRepository $userRepository): Response
+    public function index(Request $request,UserRepository $userRepository, PaginatorInterface $paginator): Response
     {
+        $users = $userRepository->findAll();
+        $users = $paginator->paginate(
+            $users, /* query NOT result */
+            $request->query->getInt('page', 1),
+            10);
         return $this->render('admin_user/index.html.twig', [
-            'users' => $userRepository->findAll(),
+            'users' => $users,
         ]);
     }
+
+    
 
     #[Route('/new', name: 'app_admin_user_new', methods: ['GET', 'POST'])]
     public function new(Request $request, UserRepository $userRepository, UserPasswordHasherInterface $passwordHasher): Response
@@ -82,4 +95,37 @@ class AdminUserController extends AbstractController
 
         return $this->redirectToRoute('app_admin_user_index', [], Response::HTTP_SEE_OTHER);
     }
+
+    #[Route('/User/Status/{id}', name: 'Status')]
+    public function DisableOrEnableUser(ManagerRegistry $doctrine, $id): Response
+    {
+        $em = $doctrine->getManager();
+        $repo = $doctrine->getRepository(user::class);
+        $User = $repo->find($id);
+    
+        if ($User->getStatus() === 'enabled') {
+            $User->setStatus('disabled');
+        } elseif ($User->getStatus() === 'disabled') {
+            $User->setStatus('enabled');
+        }
+    
+        $em->persist($User);
+        $em->flush();
+    
+        return $this->redirectToRoute('app_admin_user_index');
+    }
+
+    #[Route('/search-users', name:'search_users')]
+    
+   public function search(Request $request, UserRepository $userRepository): Response
+   {
+       $keyword = $request->query->get('keyword');
+       $users = $userRepository->search($keyword);
+
+       return $this->render('user/search.html.twig', [
+           'users' => $users,
+       ]);
+   }
+
+
 }

@@ -7,6 +7,7 @@
        
    
           {% block stylesheets %}
+          <link rel="stylesheet" href="{{ asset('bundles/mercuryseriesflashy/css/flashy.css') }}">
           <link href="{{asset('css/reset.css')}}" rel="stylesheet" type="text/css">
         <!-- Bootstrap -->
         <link href="{{asset('assets/bootstrap/css/bootstrap.min.css')}}" rel="stylesheet" type="text/css">
@@ -34,6 +35,7 @@
        
     </head>
     <body>
+      {{ include('@MercurySeriesFlashy/flashy.html.twig') }}
      <!-- Start Preloader -->
         <div id="loading">
           <div class="element">
@@ -55,7 +57,7 @@
                     <span class="col-xs-12 col-sm-3 logo"><a href="index-2.html"><img class="main" src="" alt=""><img class="fix" src="images/logo-fix.png" alt="Fitness Gym"></a></span>
                     <div class="col-xs-12 col-sm-9 header-right">
                         <div class="header_search_outer" href="{{ path('app_lookup')}}">
-                            <span class="icon-search-icon" ></span>
+                           
                            
                         </div>
                         <!-- Start Navigation -->
@@ -92,12 +94,14 @@
                                        
                                         <a class="nav-link" href="{{ path('app_logout') }}">Logout</a>
                                     </li>
-                                     {% endif %}
+                                  
                                      <li class="nav-item">
-                                        <a class="nav-link" href="{{ path('app_lookup')}}">search</a>
+
+                            
+                                        
                                     </li>  
 
-
+   {% endif %}
 
                             </div>
                         </nav>
@@ -198,6 +202,8 @@
         <script src="{{asset('assets/counterup/waypoints.min.js')}}"></script>  
         <!-- Custom JS --> 
         <script src="{{asset('js/custom.js')}}"></script>
+        <script src="{{ asset('bundles/mercuryseriesflashy/js/flashy.js') }}"></script>
         {% endblock %}
+          
   </body>
 </html>
