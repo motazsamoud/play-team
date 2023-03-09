@@ -51,7 +51,8 @@
 	<link rel="stylesheet" type="text/css" href="../admin/assets/css/dashboard.css">
 	<link class="skin" rel="stylesheet" type="text/css" href="../admin/assets/css/color/color-1.css">
 
-
+	{% block stylesheets %}
+	{% endblock %}
 
 {% endblock %}
 
@@ -270,6 +271,12 @@
 						<a href="{{ asset ('afficher_adh') }}" class="ttr-material-button">
 							<span class="ttr-icon"><i class="ti-book"></i></span>
 							<span class="ttr-label">afficher Adherent</span>
+						</a>
+					</li>
+					<li>
+						<a href="{{ asset ('statsabonn') }}" class="ttr-material-button">
+							<span class="ttr-icon"><i class="ti-book"></i></span>
+							<span class="ttr-label">Statistique</span>
 						</a>
 					</li>
 
@@ -536,7 +543,7 @@
 	<div class="ttr-overlay"></div>
 	{% endblock %}
 <!-- External JavaScripts -->
-{% block js %}
+
 <script src="../admin/assets/js/jquery.min.js"></script>
 <script src="../admin/assets/vendors/bootstrap/js/popper.min.js"></script>
 <script src="../admin/assets/vendors/bootstrap/js/bootstrap.min.js"></script>
@@ -635,7 +642,10 @@
   });
 
 </script>
-{% endblock %}
+
+	{% block js %}
+
+	{% endblock %}
 </body>
 
 <!-- Mirrored from educhamp.themetrades.com/demo/admin/index.html by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 22 Feb 2019 13:09:05 GMT -->

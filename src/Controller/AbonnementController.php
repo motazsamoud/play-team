@@ -5,12 +5,16 @@ namespace App\Controller;
 use App\Entity\Abonnement;
 use App\Form\AbonnementType;
 use App\Repository\AbonnementRepository;
+use App\Repository\JeuxRepository;
 use Doctrine\Persistence\ManagerRegistry;
+use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Serializer\Exception\ExceptionInterface;
+use Symfony\Component\Serializer\Normalizer\NormalizerInterface;
 use Symfony\Component\String\Slugger\SluggerInterface;
 
 class AbonnementController extends AbstractController
@@ -55,12 +59,17 @@ class AbonnementController extends AbstractController
     }
 
     #[Route('/afficher_ab', name: 'afficher_ab')]
-    public function AfficheAbonnement (AbonnementRepository $repo   ): Response
+    public function AfficheAbonnement (AbonnementRepository $repo ,PaginatorInterface $paginator ,Request $request   ): Response
     {
         //$repo=$this ->getDoctrine()->getRepository(Abonnement::class) ;
         $Abonnement=$repo->findAll() ;
+        $pagination = $paginator->paginate(
+            $Abonnement,
+            $request->query->getInt('page', 1),
+            3 // items per page
+        );
         return $this->render('abonnement/index.html.twig' , [
-            'Abonnement' => $Abonnement ,
+            'Abonnement' => $pagination ,
             'ajoutA' => $Abonnement
         ]) ;
     }
@@ -91,5 +100,30 @@ class AbonnementController extends AbstractController
             'form' => $form->createView()
         ]) ;
 
+    }
+
+    #[Route('/statsabonn', name: 'statsabonn')]
+    public function statistiques(AbonnementRepository $abonnrepo){
+        // On va chercher toutes les catégories
+        $abonn = $abonnrepo->findAll();
+
+        $abonnName = [];
+        $abonnColor = [];
+        $abonnCount = [];
+
+        // On "démonte" les données pour les séparer tel qu'attendu par ChartJS
+        foreach($abonn as $abon){
+            $abonnName[] = $abon->getName();
+            $abonnColor[] = $abon->getColor();
+            $abonnCount[] = count($abon->getAdherents());
+        }
+
+        // On va chercher le nombre d'annonces publiées par date
+
+        return $this->render('stat/stats.html.twig', [
+            'abonnName' => json_encode($abonnName),
+            'abonnColor' => json_encode($abonnColor),
+            'abonnCount' => json_encode($abonnCount),
+        ]);
     }
 }

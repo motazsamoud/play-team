@@ -8,40 +8,51 @@ use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
-
+use Symfony\Component\Serializer\Annotation\Groups;
 #[ORM\Entity(repositoryClass: AbonnementRepository::class)]
 class Abonnement
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
+    #[Groups("post:read")]
     private ?int $id = null;
 
     #[ORM\Column(type: Types::DATE_MUTABLE)]
     #[Assert\NotNull (message: "Il faut remplire ce chemp")]
+    #[Groups("post:read")]
     private ?\DateTimeInterface $date = null;
 
     #[ORM\Column]
     #[Assert\NotNull (message: "Il faut remplire ce chemp")]
+    #[Groups("post:read")]
     private ?float $duree = null;
 
     #[ORM\Column]
     #[Assert\NotNull (message: "Il faut remplire ce chemp")]
+    #[Groups("post:read")]
     private ?int $prixA = null;
 
     #[ORM\Column(length: 255)]
     #[Assert\NotNull (message: "Il faut remplire ce chemp")]
+    #[Groups("post:read")]
     private ?string $description = null;
 
     #[ORM\OneToMany(mappedBy: 'abonnements', targetEntity: Adherent::class, orphanRemoval: true)]
+    #[Groups("post:read")]
     private Collection $adherents;
 
     #[ORM\Column(length: 255)]
     #[Assert\NotNull (message: "Il faut remplire ce chemp")]
+    #[Groups("post:read")]
     private ?string $Name = null;
 
     #[ORM\Column(length: 255)]
+    #[Groups("post:read")]
     private ?string $image = null;
+
+    #[ORM\Column(length: 255)]
+    private ?string $color = null;
 
     public function __construct()
     {
@@ -151,6 +162,18 @@ class Abonnement
     public function setImage(string $image): self
     {
         $this->image = $image;
+
+        return $this;
+    }
+
+    public function getColor(): ?string
+    {
+        return $this->color;
+    }
+
+    public function setColor(string $color): self
+    {
+        $this->color = $color;
 
         return $this;
     }
