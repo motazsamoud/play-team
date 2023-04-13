@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.image.*?>
+<?import javafx.scene.text.*?>
+<?import java.lang.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane id="AnchorPane" prefHeight="924.0" prefWidth="1296.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Views.ActiviteController">
+   <children>
+      <ImageView fitHeight="924.0" fitWidth="1296.0">
+         <image>
+            <Image url="@pexels-leon-ardho-1552106.jpg" />
+         </image>
+      </ImageView>
+      <TableView fx:id="tableRes" layoutX="408.0" layoutY="572.0" onMouseClicked="#selected" prefHeight="266.0" prefWidth="612.0">
+         <columns>
+            <TableColumn fx:id="id" minWidth="0.0" prefWidth="0.0" text="ID" />
+            <TableColumn fx:id="idactivite" prefWidth="180.0" text="IDActivite" />
+            <TableColumn fx:id="nom_ac" minWidth="0.0" prefWidth="208.0" text="nom_ac" />
+            <TableColumn fx:id="description" prefWidth="200.0" text="description" />
+         </columns>
+      </TableView>
+      <Button fx:id="fermerRes" layoutX="677.0" layoutY="68.0" mnemonicParsing="false" onMouseClicked="#closeRes" text="fermer" />
+      <TextArea fx:id="idActivite" layoutX="31.0" layoutY="573.0" prefHeight="43.0" prefWidth="149.0" promptText="id activite">
+         <font>
+            <Font size="19.0" />
+         </font></TextArea>
+      <TextArea fx:id="nom_acActivite" layoutX="31.0" layoutY="804.0" prefHeight="43.0" prefWidth="149.0" promptText="Nom activite">
+          
+         <font>
+            <Font size="18.0" />
+         </font></TextArea>
+        <TextArea fx:id="descriptionActivite" layoutX="32.0" layoutY="495.0" prefHeight="43.0" prefWidth="149.0" promptText="Description activite">
+          
+         <font>
+            <Font size="18.0" />
+         </font></TextArea>
+      <ComboBox fx:id="idEvent" layoutX="31.0" layoutY="687.0" prefHeight="43.0" prefWidth="150.0" promptText="Categorie" />
+      <Button fx:id="ajouterRes" layoutX="1180.0" layoutY="813.0" mnemonicParsing="false" onMouseClicked="#addRes" prefHeight="25.0" prefWidth="61.0" text="ajouter" />
+      <Button fx:id="supprimerRes" layoutX="1176.0" layoutY="654.0" mnemonicParsing="false" onMouseClicked="#deleteRes" text="supprimer" />
+      <Button fx:id="modifierRes" layoutX="1180.0" layoutY="730.0" mnemonicParsing="false" onMouseClicked="#updateRes" text="modifier" />
+   </children>
+</AnchorPane>
